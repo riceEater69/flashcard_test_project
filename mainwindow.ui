@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>702</width>
+    <width>696</width>
     <height>593</height>
    </rect>
   </property>
@@ -16,9 +16,16 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/new_qrc/SoftNote.png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page_3">
        <layout class="QGridLayout" name="gridLayout_4">
@@ -53,6 +60,13 @@
             </widget>
            </item>
            <item>
+            <widget class="QLabel" name="label_date_time">
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QPushButton" name="back_button">
              <property name="maximumSize">
               <size>
@@ -71,7 +85,7 @@
         <item row="2" column="0">
          <widget class="QTabWidget" name="tabWidget">
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <property name="usesScrollButtons">
            <bool>false</bool>
@@ -147,22 +161,7 @@
              </layout>
             </item>
             <item row="0" column="1">
-             <layout class="QVBoxLayout" name="verticalLayout_11">
-              <item>
-               <widget class="QLabel" name="label_3">
-                <property name="text">
-                 <string>Time</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="label_date_time">
-                <property name="text">
-                 <string/>
-                </property>
-               </widget>
-              </item>
-             </layout>
+             <layout class="QVBoxLayout" name="verticalLayout_11"/>
             </item>
             <item row="1" column="0" colspan="3">
              <widget class="QPushButton" name="pushButton_8">
@@ -192,8 +191,23 @@
             <height>21</height>
            </size>
           </property>
+          <property name="font">
+           <font>
+            <family>Ink Free</family>
+            <pointsize>10</pointsize>
+            <italic>false</italic>
+            <bold>false</bold>
+            <underline>true</underline>
+           </font>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(0, 0, 127);
+font: 900 italic 12pt &quot;Segoe UI&quot;;
+font: 12pt &quot;Segoe UI&quot;;
+font: 10pt &quot;Ink Free&quot;;</string>
+          </property>
           <property name="text">
-           <string>Topics</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; font-weight:700;&quot;&gt;TOPICS&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -242,7 +256,11 @@
              <height>400</height>
             </rect>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout_5"/>
+           <layout class="QVBoxLayout" name="verticalLayout_5">
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout"/>
+            </item>
+           </layout>
           </widget>
          </widget>
         </item>
@@ -257,7 +275,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>702</width>
+     <width>696</width>
      <height>21</height>
     </rect>
    </property>

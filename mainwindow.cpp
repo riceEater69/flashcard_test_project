@@ -282,6 +282,23 @@ void MainWindow::on_actiontext_color_triggered()
             // Set text color for QLineEdit and QTextEdit using style sheets
             ui->tanswer_text->setStyleSheet(QString("color: %1;").arg(textColor.name()));
             ui->tquestion_text->setStyleSheet(QString("color: %1;").arg(textColor.name()));
+             ui->add_text->setStyleSheet(QString("color: %1;").arg(textColor.name()));
+               ui->label_date_time->setStyleSheet(QString("color: %1;").arg(textColor.name()));
+                 ui->label_2->setStyleSheet(QString("color: %1;").arg(textColor.name()));
+                   ui->back_button->setStyleSheet(QString("color: %1;").arg(textColor.name()));
+
+
+
+                   ui->tabWidget->setStyleSheet(QString("color: %1;").arg(textColor.name()));
+                   ui->tanswer_label->setStyleSheet(QString("color: %1;").arg(textColor.name()));
+                   ui->tquestion_label->setStyleSheet(QString("color: %1;").arg(textColor.name()));
+                   ui->pushButton_8->setStyleSheet(QString("color: %1;").arg(textColor.name()));
+
+                   ui->add_text->setStyleSheet(QString("color: %1;").arg(textColor.name()));
+                   ui->clear_text->setStyleSheet(QString("color: %1;").arg(textColor.name()));
+                   ui->remove_text->setStyleSheet(QString("color: %1;").arg(textColor.name()));
+                   ui->update_text->setStyleSheet(QString("color: %1;").arg(textColor.name()));
+
 
             // Set text color for QListWidget using style sheets
 
@@ -311,6 +328,29 @@ void MainWindow::on_actionbeckground_color_triggered()
             // Set background color for QListWidget using style sheets
 
             ui->card_list->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+            ui->new_topic->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+            ui->new_topic_button->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+            ui->scrollArea->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+
+
+
+            ui->clear_text->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+            ui->label_date_time->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+            ui->label_2->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+            ui->back_button->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+
+
+            ui->tabWidget->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+            ui->tanswer_label->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+            ui->tquestion_label->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+            ui->pushButton_8->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+
+
+            ui->remove_text->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+            ui->update_text->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+
+
+            //ui->stackedWidget->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
              }
             }
 

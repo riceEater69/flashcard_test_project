@@ -7,6 +7,9 @@
 #include "qna.cpp"
 #include <algorithm>
 #include <random>
+#include<QFontDialog>
+#include <QColorDialog>
+#include<QColor>
 
 card::card(std::vector <qna> *cardlist, QWidget *parent) :
     QDialog(parent),
@@ -18,6 +21,9 @@ card::card(std::vector <qna> *cardlist, QWidget *parent) :
     }
 
     ui->setupUi(this);
+
+
+    connect(ui->textcolor, &QPushButton::clicked, this, &card::on_textcolor_clicked);
     second =0;
     minute=0;
     pauser= false;
@@ -147,6 +153,112 @@ void card::processor()
       else{
         ui->seconds->display(second);
         ui->minutes->display(minute);
+      }
+}
+
+
+void card::on_font_clicked()
+{
+      bool ok;
+      QFont font =QFontDialog::getFont(&ok,this);
+      if(ok){
+        ui->start->setFont(font);
+        ui->pause->setFont(font);
+
+        ui->stop->setFont(font);
+        ui->pushButton_2->setFont(font);
+        ui->pushButton_3->setFont(font);
+
+        ui->pushButton->setFont(font);
+        ui->label_2->setFont(font);
+        ui->label->setFont(font);
+
+        ui->seconds->setFont(font);
+                ui->minutes->setFont(font);
+
+
+
+      }else return;
+}
+
+
+// Assuming you have a QPushButton named 'yourButton' in your UI
+
+
+void card::on_textcolor_clicked()
+{
+      // Get the selected text color using QColorDialog
+      QColor textColor = QColorDialog::getColor(Qt::black, this, "Select Text Color");
+
+      // If the user selected a color, update the text color for relevant components
+      if (textColor.isValid()) {
+                ui->label_2->setStyleSheet(QString("color: %1;").arg(textColor.name()));
+                ui->label->setStyleSheet(QString("color: %1;").arg(textColor.name()));
+                ui->minutes->setStyleSheet(QString("color: %1;").arg(textColor.name()));
+                ui->seconds->setStyleSheet(QString("color: %1;").arg(textColor.name()));
+                ui->start->setStyleSheet(QString("color: %1;").arg(textColor.name()));
+                ui->pause->setStyleSheet(QString("color: %1;").arg(textColor.name()));
+                ui->stop->setStyleSheet(QString("color: %1;").arg(textColor.name()));
+                ui->pushButton_2->setStyleSheet(QString("color: %1;").arg(textColor.name()));
+                ui->pushButton_3->setStyleSheet(QString("color: %1;").arg(textColor.name()));
+                ui->pushButton->setStyleSheet(QString("color: %1;").arg(textColor.name()));
+      }
+}
+
+
+
+
+void card::on_background_color_clicked()
+
+      {
+                // Get the selected background color using QColorDialog
+                QColor bgColor = QColorDialog::getColor(Qt::white, this, "Select Background Color");
+
+                // If the user selected a color, update the background color for relevant components
+                if (bgColor.isValid()) {
+                    // Set background color for QLineEdit and QTextEdit using style sheets
+                    ui->groupBox->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+                    ui->label_2->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+
+                    // Set background color for QListWidget using style sheets
+
+                    ui->label->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+                    ui->minutes->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+                    ui->seconds->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+                    ui->start->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+
+
+
+                    ui->pause->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+                    ui->stop->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+                    ui->pushButton_3->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+                    ui->pushButton_2->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+
+
+                    ui->pushButton->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+
+
+
+                    //ui->stackedWidget->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+
+      }
+      }
+
+void card::on_background_color2_clicked()
+{
+      {
+
+                    {
+                        // Get the selected background color using QColorDialog
+                        QColor bgColor = QColorDialog::getColor(Qt::white, this, "Select Background Color");
+
+                        // If the user selected a color, update the background color for the main window
+                        if (bgColor.isValid()) {
+                            // Set background color for the main window using style sheets
+                            this->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+                        }
+                    }
+
       }
 }
 

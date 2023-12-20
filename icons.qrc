@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/icon_pic">
+        <file>text (1).png</file>
+        <file>pantone.png</file>
+        <file>color.png</file>
+        <file>theme.png</file>
+        <file>text.png</file>
+        <file>font.png</file>
+        <file>reset.png</file>
+        <file>pause.png</file>
+        <file>play.png</file>
+    </qresource>
+</RCC>

@@ -40,6 +40,16 @@ private slots:
     void on_stop_clicked();
     void processor();
 
+    void on_pushButton_7_clicked();
+
+    void on_font_clicked();
+
+    void on_textcolor_clicked();
+
+    void on_background_color_clicked();
+
+    void on_background_color2_clicked();
+
 private:
     Ui::card *ui;
     short int minute;
