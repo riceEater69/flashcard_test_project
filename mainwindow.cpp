@@ -27,26 +27,30 @@ MainWindow::MainWindow(QWidget *parent)
 
     try {
         // Iterate over the files in the directory
+
+
         for (const auto& entry : std::filesystem::directory_iterator(directoryPath)) {
             // Print the filename
-            topics.push_back(entry.path().filename().string());
+            topics.push_back(entry.path().filename().string());// add topic to array
+            //Topic ko UI
             QFrame * fm=new QFrame;
             QHBoxLayout *horizontalLayout = new QHBoxLayout(fm);
             QPushButton * btn1=new QPushButton(QString::fromStdString(entry.path().filename().string()));
             horizontalLayout->addWidget(btn1);
-
             QPushButton * btn2=new QPushButton(QString("delete"));
             horizontalLayout->addWidget(btn2);
             ui->verticalLayout_5->addWidget(fm);
-               int currentsize=topics.size()-1;
+            //dynamic ui
+            std::string curtopic=entry.path().filename().string();
+
             connect(btn1, &QPushButton::clicked, this, [=]() {
                 // Your custom slot logic with parameters here
-                goTopic(currentsize);
+                goTopic(curtopic);
             });
             ui->new_topic->clear();
             connect(btn2, &QPushButton::clicked, this, [=]() {
                 // Your custom slot logic with parameters here
-                deleteTopic(currentsize,fm);
+                deleteTopic(curtopic,fm);
             });
 
         }
@@ -93,9 +97,7 @@ void MainWindow::addTextToList() {
     if (!question.isEmpty() && !answer.isEmpty()) {
          this->questions.push_back(qs);
 
-//        QString displayText = QString("Question: %1\nAnswer: %2 \n")
-//                                  .arg(question)
-//                                  .arg(answer);
+
          QString displayText=QString("Question: %1").arg(question);
         ui->card_list->addItem(displayText);
         ui->tquestion_text->clear();
@@ -106,30 +108,23 @@ void MainWindow::addTextToList() {
 void MainWindow::on_pushButton_8_clicked()
 {
 
-    // MainWindow.cpp
-    {
-        // Create an instance of the card
-//        std:: cout<<this->ui->card_list->item(0)->text().toStdString();
+
+
+
+
 
         card card(&(this->questions));
 
 
 
-        // Get the text from line edit for question and text edit for answer
-//        QString questionText = ui->tquestion_text->text();
-//        QString answerText = ui->tanswer_text->toPlainText();
 
-        // Set the question text in label_2 of the card
-
-
-        // Set the answer text in the label in card UI
 
 
         // Set the window title and display the card
         card.setWindowTitle("cards");
         card.setModal(true);
         card.exec();
-    }
+
 
 
 
@@ -206,13 +201,15 @@ void MainWindow::on_update_text_clicked()
        QListWidgetItem* selectedItem = ui->card_list->currentItem();
 
         if (selectedItem) {
+
        questions[currentIndex].answer=ui->tanswer_text->toPlainText().toStdString();
         questions[currentIndex].question=ui->tquestion_text->text().toStdString();
             // Update the selected item with new text
-            QString updatedText = QString("Question: %1")
-                                  .arg(ui->tquestion_text->text());
 
-        selectedItem->setText(updatedText);
+
+        selectedItem->setText(QString("Question: %1")
+                                  .arg(ui->tquestion_text->text()));
+
             update_cards();
         }
 
@@ -225,6 +222,7 @@ void MainWindow::on_remove_text_clicked()
 
             // Get the selected item
         int currentIndex=ui->card_list->currentIndex().row();
+
         questions.erase(questions.begin() + currentIndex);
             QListWidgetItem* selectedItem = ui->card_list->currentItem();
 
@@ -404,17 +402,19 @@ void MainWindow::on_new_topic_button_clicked()
             horizontalLayout->addWidget(btn1);
 
             QPushButton * btn2=new QPushButton(QString("delete"));
-            int currentsize=topics.size()-1;
+
            horizontalLayout->addWidget(btn2);
                 ui->verticalLayout_5->addWidget(fm);
+           std::string curtopic=ui->new_topic->text().toStdString();
             connect(btn1, &QPushButton::clicked, this, [=]() {
                 // Your custom slot logic with parameters here
-                goTopic(currentsize);
+                goTopic(curtopic);
             });
                 ui->new_topic->clear();
             connect(btn2, &QPushButton::clicked, this, [=]() {
                 // Your custom slot logic with parameters here
-                deleteTopic(currentsize,fm);
+
+                deleteTopic(curtopic,fm);
             });
 
              }
@@ -424,25 +424,34 @@ void MainWindow::on_new_topic_button_clicked()
 
             }
 }
-void MainWindow::goTopic(int index){
+void MainWindow::goTopic(std::string ctopic){
 
-            topic=topics[index];
-            questions.clear();
+            topic=ctopic;
+            questions.clear(); //remove all question from previous topic-> questions<vector>array
+              ui->card_list->clear();//ui clear
             ui->label_2->setText(QString("Cards: %1").arg(QString::fromStdString(topic)));
-              ui->card_list->clear();
+             ui->tquestion_text->clear();
+            //clear line text and planetext
+              ui->tanswer_text->clear();
             load_cards();
 
-            ui->tquestion_text->clear();
-            ui->tanswer_text->clear();
+
 
             ui->stackedWidget->setCurrentIndex(0);
 
 
 }
-void MainWindow::deleteTopic(int index,QFrame * frame){
+void MainWindow::deleteTopic(std::string ctopic,QFrame * frame){
+            int index=0;
+            for(int i=0;i<topics.size();i++){
+             if(topics[i]==ctopic){
+            index=i;
+            break;
+             }
+            }
             frame->deleteLater();//button hatayo
             std::filesystem::remove("flashcards/"+topics[index]);//file hatayo
-            topics.erase(topics.begin() + index);//list bata hatayo
+            topics.erase(topics.begin() + index);//list (vec array) bata hatayo
 
 
 
@@ -455,15 +464,17 @@ void MainWindow::on_back_button_clicked()
 }
 void MainWindow::load_cards(){
             std::ifstream infile;
-            infile.open("flashcards/"+topic);
+            infile.open("flashcards/"+topic);//open file containnign question and answer
+
             std::string line;
-            while (std::getline(infile, line)) {
+            while (std::getline(infile, line)) {//extract line by line from file.
              // Process each line
-             std::stringstream ss(line);
+             std::stringstream ss(line);//create stream
              qna qs;
              std::getline(ss, qs.question, '~');
+             //extract  and answer from line
              std::getline(ss, qs.answer, '~');
-             questions.push_back(qs);
+             questions.push_back(qs);//vec array (questions)
 
              QString displayText=QString("Question: %1").arg(QString::fromStdString(qs.question));
              ui->card_list->addItem(displayText);
@@ -475,7 +486,11 @@ void MainWindow::load_cards(){
 void MainWindow::update_cards(){
 
      std::ofstream outfile;
-     outfile.open("flashcards/"+topic);
+     outfile.open("flashcards/"+topic);//open file for writing
+     //all contents are erased
+
+
+     //write content from vec array (questions) to file
      for(int i=0;i<questions.size();i++){
              outfile<<questions[i].question+"~"+questions[i].answer+"\n";
 

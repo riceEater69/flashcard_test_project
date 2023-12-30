@@ -6,6 +6,7 @@
 #include <QTimer>
 #include "qframe.h"
 #include "qna.cpp"
+#include <iostream>
 QT_BEGIN_NAMESPACE
 namespace Ui { class Flash_card; }
 QT_END_NAMESPACE
@@ -13,14 +14,13 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
-    std::vector <qna> questions;
-    std::vector <std::string> topics;
+    std::vector <qna> questions; //array of questions
+    std::vector <std::string> topics; //array of topics
     void load_cards();
     void update_cards();
-    std::string topic;
+    std::string topic;//memorize current topic
 public:
-
-    MainWindow(QWidget *parent = nullptr);
+     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
 public slots:
@@ -35,7 +35,7 @@ public slots:
 
 private slots:
     void on_pushButton_8_clicked();
-    void on_pushButton_7_clicked();
+
     void on_add_text_clicked();
     void on_update_text_clicked();
     void on_remove_text_clicked();
@@ -45,10 +45,9 @@ private slots:
     void on_actionbeckground_color_triggered();
     void on_actionbackground_triggered();
     void on_actionnew_triggered();
-    void on_actionload_triggered();
-    void on_actionsave_triggered();
-    void goTopic(int);
-    void deleteTopic(int,QFrame *);
+
+    void goTopic(std::string);
+    void deleteTopic(std::string,QFrame *);
 
     void on_new_topic_button_clicked();
 

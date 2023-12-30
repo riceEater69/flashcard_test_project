@@ -1,7 +1,5 @@
 <RCC>
     <qresource prefix="/new_qrc">
         <file>SoftNote.png</file>
-        <file>icons.qrc</file>
-        <file>text_color.qrc</file>
     </qresource>
 </RCC>

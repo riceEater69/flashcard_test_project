@@ -15,6 +15,11 @@ class card : public QDialog
     Q_OBJECT
   int index;
     std::vector <qna>  card_list;
+  void setfontcolor();
+    void setcolor_for_card_elements();
+  void setcolor_for_card_bg();
+    void setcolorforbg2();
+  void update_styles_to_file();
 public:
     explicit card(std::vector <qna> *,QWidget *parent=nullptr);
     ~card();
@@ -40,7 +45,7 @@ private slots:
     void on_stop_clicked();
     void processor();
 
-    void on_pushButton_7_clicked();
+
 
     void on_font_clicked();
 
@@ -56,6 +61,7 @@ private:
     short int second;
     bool pauser;
     QTimer clock;
+    std::vector <std::string> card_styles;
 
 
 };

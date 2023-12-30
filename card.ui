@@ -19,29 +19,29 @@
   <property name="styleSheet">
    <string notr="true"/>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_3">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QGroupBox" name="groupBox">
      <property name="styleSheet">
-      <string notr="true"/>
+      <string notr="true">background-color: rgb(70, 70, 70);</string>
      </property>
      <property name="title">
       <string/>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_5">
         <item>
          <widget class="QPushButton" name="font">
           <property name="styleSheet">
-           <string notr="true">image: url(:/icon_pic/text.png);
+           <string notr="true">image: url(:/text.png);
 </string>
           </property>
           <property name="text">
            <string/>
           </property>
           <property name="icon">
-           <iconset resource="icons.qrc">
+           <iconset>
             <normaloff>:/icon_pic/text.png</normaloff>:/icon_pic/text.png</iconset>
           </property>
           <property name="flat">
@@ -52,7 +52,7 @@
         <item>
          <widget class="QPushButton" name="background_color2">
           <property name="styleSheet">
-           <string notr="true">image: url(:/icon_pic/theme.png);</string>
+           <string notr="true">image: url(:/theme.png);</string>
           </property>
           <property name="text">
            <string/>
@@ -65,7 +65,7 @@
         <item>
          <widget class="QPushButton" name="background_color">
           <property name="styleSheet">
-           <string notr="true">image: url(:/icon_pic/color.png);</string>
+           <string notr="true">image: url(:/color.png);</string>
           </property>
           <property name="text">
            <string/>
@@ -78,7 +78,7 @@
         <item>
          <widget class="QPushButton" name="textcolor">
           <property name="styleSheet">
-           <string notr="true">image: url(:/icon_pic/pantone.png);</string>
+           <string notr="true">image: url(:/pantone.png);</string>
           </property>
           <property name="text">
            <string/>
@@ -143,59 +143,84 @@
     </layout>
    </item>
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_2">
-       <item>
-        <widget class="QLCDNumber" name="minutes">
-         <property name="styleSheet">
-          <string notr="true">color:rgb(170, 43, 20)</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLCDNumber" name="seconds">
-         <property name="styleSheet">
-          <string notr="true">color: rgb(255, 0, 0);</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <item>
-        <widget class="QPushButton" name="start">
-         <property name="text">
-          <string>start</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pause">
-         <property name="text">
-          <string>pause</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="stop">
-         <property name="styleSheet">
-          <string notr="true">image: url(:/icon_pic/reset.png);</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-    </layout>
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(148, 148, 148);</string>
+     </property>
+     <property name="title">
+      <string/>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_5">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QLCDNumber" name="minutes">
+            <property name="styleSheet">
+             <string notr="true">color:rgb(170, 43, 20)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLCDNumber" name="seconds">
+            <property name="styleSheet">
+             <string notr="true">color: rgb(255, 0, 0);</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QPushButton" name="start">
+            <property name="styleSheet">
+             <string notr="true">image: url(:/play.png);</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pause">
+            <property name="styleSheet">
+             <string notr="true">image: url(:/pause.png);</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="stop">
+            <property name="styleSheet">
+             <string notr="true">image: url(:/reset.png);</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="icons.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

@@ -3,6 +3,7 @@
 #include <QDebug>
 #include "ui_card.h"
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include "qna.cpp"
 #include <algorithm>
@@ -10,6 +11,7 @@
 #include<QFontDialog>
 #include <QColorDialog>
 #include<QColor>
+
 
 card::card(std::vector <qna> *cardlist, QWidget *parent) :
     QDialog(parent),
@@ -24,6 +26,8 @@ card::card(std::vector <qna> *cardlist, QWidget *parent) :
 
 
     connect(ui->textcolor, &QPushButton::clicked, this, &card::on_textcolor_clicked);
+
+
     second =0;
     minute=0;
     pauser= false;
@@ -31,7 +35,38 @@ card::card(std::vector <qna> *cardlist, QWidget *parent) :
 
 
 
+    std::ifstream incolor;
+    incolor.open("color");
+    if(incolor.good()){
 
+        std::string line;
+
+        while(std::getline(incolor,line))
+        {
+            card_styles.push_back(line);
+        }
+
+        incolor.close();
+    }
+    else
+    {
+
+
+
+
+        card_styles.push_back("Times New Roman,11,-1,5,700,1,0,0,0,0,0,0,0,0,0,1,Bold Italic");
+        card_styles.push_back("#000000");
+        card_styles.push_back("#ffffff");
+        card_styles.push_back("#ffffff");
+        update_styles_to_file();
+
+
+    }
+    //seting defalt(current) color/styles
+    setfontcolor();
+    setcolorforbg2();
+    setcolor_for_card_elements();
+    setcolor_for_card_bg();
 
     index = 0;
 
@@ -45,15 +80,15 @@ card::card(std::vector <qna> *cardlist, QWidget *parent) :
     std::shuffle(card_list.begin(), card_list.end(), g);
 
     // Update label with the first question
-    ui->label_2->setText(QString("Question:\n%1").arg(QString::fromStdString(card_list[index].question)));
+//    ui->label_2->setText(QString("Question:\n%1").arg(QString::fromStdString(card_list[index].question)));
     newQuestion();
 
     // Set label for answer
-    ui->label->setText(QString("Answer:\n"));
+
 
     // Connect button clicks to slots
-    connect(ui->pushButton_2, &QPushButton::clicked, this, &card::on_pushButton_2_clicked);
-    connect(ui->pushButton, &QPushButton::clicked, this, &card::on_pushButton_clicked);
+//    connect(ui->pushButton_2, &QPushButton::clicked, this, &card::on_pushButton_2_clicked);
+//    connect(ui->pushButton, &QPushButton::clicked, this, &card::on_pushButton_clicked);
 }
 
 
@@ -118,12 +153,12 @@ void card::on_pause_clicked()
       {
         clock.stop();
         pauser= true;
-        ui->pause->setText("unpause");
+//        ui->pause->setText("unpause");
       }
       else{
         pauser=false;
                   clock.start(1000);
-         ui->pause->setText("pause");
+//         ui->pause->setText("pause");
       }
 
 }
@@ -162,25 +197,34 @@ void card::on_font_clicked()
       bool ok;
       QFont font =QFontDialog::getFont(&ok,this);
       if(ok){
-        ui->start->setFont(font);
-        ui->pause->setFont(font);
 
-        ui->stop->setFont(font);
-        ui->pushButton_2->setFont(font);
-        ui->pushButton_3->setFont(font);
+        card_styles[0]=font.toString().toStdString();
+        setfontcolor();
+        update_styles_to_file();
 
-        ui->pushButton->setFont(font);
-        ui->label_2->setFont(font);
-        ui->label->setFont(font);
-
-        ui->seconds->setFont(font);
-                ui->minutes->setFont(font);
 
 
 
       }else return;
 }
 
+
+void card::setfontcolor(){
+        //ui->start->setFont(QFont(QString::fromStdString(card_styles[0])));
+      //ui->pause->setFont(QFont(QString::fromStdString(card_styles[0])));
+
+      //ui->stop->setFont(QFont(card_styles[0]));
+      ui->pushButton_2->setFont(QFont(QString::fromStdString(card_styles[0])));
+      ui->pushButton_3->setFont(QFont(QString::fromStdString(card_styles[0])));
+
+      ui->pushButton->setFont(QFont(QString::fromStdString(card_styles[0])));
+      ui->label_2->setFont(QFont(QString::fromStdString(card_styles[0])));
+      ui->label->setFont(QFont(QString::fromStdString(card_styles[0])));
+
+      ui->seconds->setFont(QFont(QString::fromStdString(card_styles[0])));
+      ui->minutes->setFont(QFont(QString::fromStdString(card_styles[0])));
+
+}
 
 // Assuming you have a QPushButton named 'yourButton' in your UI
 
@@ -192,19 +236,32 @@ void card::on_textcolor_clicked()
 
       // If the user selected a color, update the text color for relevant components
       if (textColor.isValid()) {
-                ui->label_2->setStyleSheet(QString("color: %1;").arg(textColor.name()));
-                ui->label->setStyleSheet(QString("color: %1;").arg(textColor.name()));
-                ui->minutes->setStyleSheet(QString("color: %1;").arg(textColor.name()));
-                ui->seconds->setStyleSheet(QString("color: %1;").arg(textColor.name()));
-                ui->start->setStyleSheet(QString("color: %1;").arg(textColor.name()));
-                ui->pause->setStyleSheet(QString("color: %1;").arg(textColor.name()));
-                ui->stop->setStyleSheet(QString("color: %1;").arg(textColor.name()));
-                ui->pushButton_2->setStyleSheet(QString("color: %1;").arg(textColor.name()));
-                ui->pushButton_3->setStyleSheet(QString("color: %1;").arg(textColor.name()));
-                ui->pushButton->setStyleSheet(QString("color: %1;").arg(textColor.name()));
+                card_styles[1]=textColor.name().toStdString();
+                setcolor_for_card_elements();
+                update_styles_to_file();
+
       }
 }
 
+void card::update_styles_to_file(){
+      std::ofstream ofile;
+      ofile.open("color");//open blank file for writing
+      ofile << card_styles[0]<<std::endl<<card_styles[1]<<std::endl<<card_styles[2]<<std::endl<<card_styles[3];
+      ofile.close();
+}
+void card:: setcolor_for_card_elements()
+{
+      ui->label_2->setStyleSheet(QString("color: %1;").arg(QString::fromStdString(card_styles[1])));
+      ui->label->setStyleSheet(QString("color: %1;").arg(QString::fromStdString(card_styles[1])));
+      ui->minutes->setStyleSheet(QString("color: %1;").arg(QString::fromStdString(card_styles[1])));
+      ui->seconds->setStyleSheet(QString("color: %1;").arg(QString::fromStdString(card_styles[1])));
+      //                ui->start->setStyleSheet(QString("color: %1;").arg(QString::fromStdString(card_styles[1])));
+      //                ui->pause->setStyleSheet(QString("color: %1;").arg(QString::fromStdString(card_styles[1])));
+      //                ui->stop->setStyleSheet(QString("color: %1;").arg(QString::fromStdString(card_styles[1])));
+      ui->pushButton_2->setStyleSheet(QString("color: %1;").arg(QString::fromStdString(card_styles[1])));
+      ui->pushButton_3->setStyleSheet(QString("color: %1;").arg(QString::fromStdString(card_styles[1])));
+      ui->pushButton->setStyleSheet(QString("color: %1;").arg(QString::fromStdString(card_styles[1])));
+}
 
 
 
@@ -216,32 +273,40 @@ void card::on_background_color_clicked()
 
                 // If the user selected a color, update the background color for relevant components
                 if (bgColor.isValid()) {
-                    // Set background color for QLineEdit and QTextEdit using style sheets
-                    ui->groupBox->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
-                    ui->label_2->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
-
-                    // Set background color for QListWidget using style sheets
-
-                    ui->label->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
-                    ui->minutes->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
-                    ui->seconds->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
-                    ui->start->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
-
-
-
-                    ui->pause->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
-                    ui->stop->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
-                    ui->pushButton_3->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
-                    ui->pushButton_2->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
-
-
-                    ui->pushButton->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
-
-
-
-                    //ui->stackedWidget->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+                card_styles[2]=bgColor.name().toStdString();
+                setcolor_for_card_bg();
+             update_styles_to_file();
 
       }
+      }
+      void card::setcolor_for_card_bg()
+      {
+
+      // Set background color for QLineEdit and QTextEdit using style sheets
+      ui->groupBox->setStyleSheet(QString("background-color: %1;").arg(QString::fromStdString(card_styles[2])));
+      ui->label_2->setStyleSheet(QString("background-color: %1;").arg(QString::fromStdString(card_styles[2])));
+
+      // Set background color for QListWidget using style sheets
+
+      ui->label->setStyleSheet(QString("background-color: %1;").arg(QString::fromStdString(card_styles[2])));
+      ui->minutes->setStyleSheet(QString("background-color: %1;").arg(QString::fromStdString(card_styles[2])));
+      ui->seconds->setStyleSheet(QString("background-color: %1;").arg(QString::fromStdString(card_styles[2])));
+      // ui->start->setStyleSheet(QString("background-color: %1;").arg(QString::fromStdString(card_styles[2])));
+
+
+
+      // ui->pause->setStyleSheet(QString("background-color: %1;").arg(QString::fromStdString(card_styles[2])));
+      //ui->stop->setStyleSheet(QString("background-color: %1;").arg(QString::fromStdString(card_styles[2])));
+      ui->pushButton_3->setStyleSheet(QString("background-color: %1;").arg(QString::fromStdString(card_styles[2])));
+      ui->pushButton_2->setStyleSheet(QString("background-color: %1;").arg(QString::fromStdString(card_styles[2])));
+
+
+      ui->pushButton->setStyleSheet(QString("background-color: %1;").arg(QString::fromStdString(card_styles[2])));
+
+
+
+      //ui->stackedWidget->setStyleSheet(QString("background-color: %1;").arg(QString::fromStdString(card_styles[2])));
+
       }
 
 void card::on_background_color2_clicked()
@@ -255,10 +320,14 @@ void card::on_background_color2_clicked()
                         // If the user selected a color, update the background color for the main window
                         if (bgColor.isValid()) {
                             // Set background color for the main window using style sheets
-                            this->setStyleSheet(QString("background-color: %1;").arg(bgColor.name()));
+                            card_styles[3]=bgColor.name().toStdString();
+                            setcolorforbg2();
+                            update_styles_to_file();
                         }
                     }
 
       }
 }
-
+void card::setcolorforbg2(){
+      this->setStyleSheet(QString("background-color: %1;").arg(QString::fromStdString(card_styles[3])));
+}

@@ -4,7 +4,7 @@
 #include <QApplication>
 #include <filesystem>
 #include <iostream>
-namespace fs = std::filesystem;
+namespace fs = std::filesystem;//create folder
 
 int main(int argc, char *argv[])
 {

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>696</width>
-    <height>593</height>
+    <width>793</width>
+    <height>620</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -85,7 +85,7 @@
         <item row="2" column="0">
          <widget class="QTabWidget" name="tabWidget">
           <property name="currentIndex">
-           <number>1</number>
+           <number>0</number>
           </property>
           <property name="usesScrollButtons">
            <bool>false</bool>
@@ -109,21 +109,21 @@
               <item>
                <widget class="QPushButton" name="add_text">
                 <property name="text">
-                 <string>add</string>
+                 <string>Add</string>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QPushButton" name="update_text">
                 <property name="text">
-                 <string>update</string>
+                 <string>Update</string>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QPushButton" name="remove_text">
                 <property name="text">
-                 <string>remove</string>
+                 <string>Remove</string>
                 </property>
                </widget>
               </item>
@@ -224,7 +224,7 @@ font: 10pt &quot;Ink Free&quot;;</string>
           </property>
          </widget>
         </item>
-        <item alignment="Qt::AlignTop">
+        <item>
          <widget class="QScrollArea" name="scrollArea">
           <property name="minimumSize">
            <size>
@@ -275,7 +275,7 @@ font: 10pt &quot;Ink Free&quot;;</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>696</width>
+     <width>793</width>
      <height>21</height>
     </rect>
    </property>
@@ -335,12 +335,12 @@ font: 10pt &quot;Ink Free&quot;;</string>
   </action>
   <action name="actionbeckground_color">
    <property name="text">
-    <string>beckground 1</string>
+    <string>Background 1</string>
    </property>
   </action>
   <action name="actionbackground">
    <property name="text">
-    <string>background 2</string>
+    <string>Background 2</string>
    </property>
   </action>
   <action name="actionFont">
@@ -355,7 +355,7 @@ font: 10pt &quot;Ink Free&quot;;</string>
   </action>
   <action name="actiontext_color">
    <property name="text">
-    <string>text color</string>
+    <string>Text color</string>
    </property>
   </action>
  </widget>

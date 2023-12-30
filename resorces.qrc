@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>reset.png</file>
+        <file>pause.png</file>
+        <file>play.png</file>
+        <file>pantone.png</file>
+        <file>color.png</file>
+        <file>theme.png</file>
+        <file>text.png</file>
+    </qresource>
+</RCC>
